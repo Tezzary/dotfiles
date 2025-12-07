@@ -25,6 +25,20 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
+local ls = require("luasnip")
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+
+    if ls.session.current_nodes[buf]
+      and not ls.session.jump_active
+    then
+      ls.unlink_current()
+    end
+  end,
+})
+
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
