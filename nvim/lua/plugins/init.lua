@@ -13,6 +13,17 @@ return {
     end,
   },
 
+  {
+    "vyfor/cord.nvim",
+    build = ":Cord update",
+    lazy = false,
+    config = function()
+      require("cord").setup({
+        -- your opts here
+      })
+    end,
+  },
+
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
